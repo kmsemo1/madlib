@@ -1,39 +1,36 @@
 var inquirer = require('inquirer');
 
-function Madlib (noun1, noun2, adjective, verb) {
-    this.noun1 = noun1;
-    this.noun2 = noun2;
+function Madlib(nouns, adjective, verb, story) {
+    this.nouns = nouns;
     this.adjective = adjective;
     this.verb = verb;
+    this.story = "Once upon a [noun] there was a [adjective] village filled with [noun]. The villagers lover to [verb] all day long.";
 
-    this.printInfo = function() {
-        console.log("_________________________________")
-        console.log("Once upon a " + this.noun1 +"there was a " + this.adjective + " village filled with " + this.noun2 + ". The villagers loved to " + this.verb + " all day long.");
-        console.log("_________________________________")
-    }
 }
+
+var nouns = [];
+var adjective = [];
+var verb = [];
+
+var loop = 0;
 
 Madlib();
 
-var askQuestion = function() {
-    inquirer.prompt([
-        {
-name: "noun1",
-message: "Enter a noun: "    
-    },
-    {
-name:"noun2",
-message:"Enter another noun: "
-    },
-    {
-        name: "adjective",
-        message:"Enter an adjective: "
-    },
-    {
-        name: "verb",
-        message: "Enter a verb: "
+var getWords = function (loop) {
+    concole.log(loop);
+    if (loop < 2) {
+        inquirer.prompt([
+            {
+                name: "noun1",
+                message: "Enter a noun: "
+            }
+        ]).then(function (answers) {
+            loop++;
+            getWords(loop);
+        })
     }
-])
 }
 
-askQuestion();
+getWords(loop);
+
+
